@@ -169,20 +169,21 @@ a{
 
 <div class="main">
 <h2>Login</h2>
-<form name="main-form" method="get" onclick="login()">
+<form name="read-user" method="post" action="read-user">
 <label>Username:</label>
-<input type="text" name="username" value="Cyanide"/>
+    <input type="text" name="user"/>
 <br/>
 <br/>
 <label>Password:</label>
-<input type="password" name="password" value="123"/>
+    <input type="password" name="pass"/>
 <br/>
 <br/>
-<button><a href="User_Home.html" class="loginbtn">Log in</a></button>
+<!--    <button><a href="User_Home.html" class="loginbtn">Log in</a></button>-->
+    <input type="submit" value="Login"/>
 <br/>
 <br/>
 <label>Don't have an account yet?</label>
-<a href="Register.html">Register now!</a>
+    <a href="Register.html">Register now!</a>
 </form>
 </div>
 </div>

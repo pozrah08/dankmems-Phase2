@@ -58,18 +58,18 @@ server.post('/read-user', function(req, resp){
   });
 });
 
-server.post('/update-user', function(req, resp){
-  const updateQuery = { user: req.body.user };
-
-  loginModel.findOne(updateQuery, function (err, login) {
-    login.pass = req.body.pass;
-    login.save(function (err, result) {
-      if (err) return console.error(err);
-      const passData = { goodStatus: 1, msg:"User updated successfully if exists!" };
-      resp.render('./pages/result',{ data:passData });
-    });
-  });
-});
+//server.post('/update-user', function(req, resp){
+//  const updateQuery = { user: req.body.user };
+//
+//  loginModel.findOne(updateQuery, function (err, login) {
+//    login.pass = req.body.pass;
+//    login.save(function (err, result) {
+//      if (err) return console.error(err);
+//      const passData = { goodStatus: 1, msg:"User updated successfully if exists!" };
+//      resp.render('./pages/result',{ data:passData });
+//    });
+//  });
+//});
 
 server.get('/view-all',function(req, resp){
     
