@@ -19,13 +19,42 @@ server.set('view engine', 'ejs');
 
 const loginSchema = new mongoose.Schema({
   user: { type: String },
-  pass: { type: String }
+  pass: { type: String },
+  picture: { type: String },
+    
 },{ versionKey: false });
 
 const loginModel = mongoose.model('login', loginSchema);
 
+const postSchema = new mongoose.Schema({
+    title: { type: String },
+    tags: [ { type: String } ],
+    picture: { type: String },
+    comments: [ { type: String } ],
+    likes: { type: Number },
+    timestamp: { type: String },
+    
+},{ versionKey: false });
+
+const postModel = mongoose.model('post', postSchema);
+
+const tagSchema = new mongoose.Schema({
+    userID: { type: String },
+    body: { type: String },
+    timestamp: { type: String },
+    parentPostID: {type: String },
+    
+},{ versionKey: false });
+
+const tagModel = mongoose.model('tag', tagSchema);
+ 
+
 server.get('/', function(req, resp){
    resp.render('./pages/home');
+});
+
+server.get('/create-post', function(req, resp){
+   resp.render('./pages/createpost');       
 });
 
 server.post('/create-user', function(req, resp){
@@ -37,7 +66,8 @@ server.post('/create-user', function(req, resp){
   loginInstance.save(function (err, fluffy) {
     if(err) return console.error(err);
     const passData = { goodStatus: 1, msg:"User created successfully" };
-    resp.render('./pages/result',{ data:passData });
+    resp.render('./pages/resultregister',{ data:passData });
+    
   });
 });
 
@@ -45,16 +75,17 @@ server.post('/read-user', function(req, resp){
   const searchQuery = { user: req.body.user, pass: req.body.pass };
   var queryResult = 0;
 
-  loginModel.findOne({}, function (err, login) {
+  loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
+    
     if(login != undefined && login._id != null)
-      queryResult = 1;
+        queryResult = 1;
 
       var strMsg;
       if(queryResult === 1)strMsg = "User-name and password match!";
       else strMsg = "User-name and password do not match!";
       const passData = { goodStatus: queryResult, msg:strMsg };
-      resp.render('./pages/result',{ data:passData });
+      resp.render('./pages/resultlogin',{ data:passData });
   });
 });
 
