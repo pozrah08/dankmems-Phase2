@@ -1,0 +1,223 @@
+.header{
+    background-color: black;
+    box-shadow: 0 1px 0px rgba(0,0,0,.2);
+    height:50px;
+}
+
+html,body{
+    font: Helvetica Nueue;
+    font-family: sans-serif;
+    background-color: #E6ECF0;
+    height: 100%;
+    width: 100%;
+}
+
+img{
+    padding-top: 20px;
+    max-width: 650px;
+    max-height: 650px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.nav {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main{
+    background-color: white;
+    width: 1000px;
+    height: 100%;
+    margin: auto;
+    padding: 20px;
+    
+}
+
+.edit, .delete{
+    border-style: solid;
+    border-radius: 200%;
+    float: right;
+    margin-right: 25px;
+    padding: 2px;
+    font-weight: bold;
+    
+}
+
+.edit:hover, .delete:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 0px rgba(0,0,0,.2);
+}
+
+.seemore{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    font-size: 20px;
+    font-family: "Comic Sans MS";
+}
+
+.seemoretxt{
+    color:black;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: gray;
+}
+
+.footerlist {
+    font-weight: bold;
+    color: black;
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.footeritem {
+    color: black;
+    margin-left: 20px;
+    
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+
+
+.title{
+    margin-left: 10px;
+    font-size: x-large;
+    font-weight: 700;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+.home, .trend, .taglist{
+    margin: 10px;
+    font-size: 25px;
+    color: white;
+    position: absolute;
+    top: 5px;
+    font-family: "Comic Sans MS";
+    left: 150px;
+    text-decoration: none;
+}
+
+.home:hover, .taglist:hover, .trend:hover{
+    color:gainsboro;
+    cursor: pointer;
+}
+
+.trend{
+    left: 350px;
+}
+
+.taglist{
+       left: 550px;
+}
+
+.register{
+    color: white;
+    background-color: rgb(0, 110, 239);
+    padding: 9px 13px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 14px;
+    text-decoration: none;
+}
+
+.register:hover{
+    color: gainsboro;
+    cursor: pointer;
+}
+
+.tags{
+    color: dodgerblue;
+    font-weight: bold;
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tags:hover{
+    color:deepskyblue;
+}
+
+.logout{
+    color:white;
+    float: right;
+    padding: 5px;
+    position: absolute;
+    right: 130px;
+    top: 16px;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.logout:hover{
+    cursor: pointer;
+    color: gainsboro;
+}
+
+
+.post{
+    border-bottom: 0.5px #E6ECF0 solid;
+    padding: 20px;
+}
+
+
+label{
+    font-weight: bold;
+    padding: 10px;
+}
+
+.uploadmeme{
+    border-style: solid;
+    border-width: 1px;
+    display: inline-table;
+    padding: 10px;   
+    
+}
+
+
+.profile {
+    max-height: 250px;
+    max-width: 250px;
+    
+}
+
+input[type=text]{
+    width: 20%;
+}
+
+.description {
+    border-style: solid;
+    border-width: 1px;
+    text-indent: 5px;
+    padding: 10px;
+}
+
+.allposts {
+    padding: 10px;
+    padding-top: 25px;
+}
+
+

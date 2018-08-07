@@ -1,0 +1,99 @@
+.header{
+    background-color: black;
+    box-shadow: 0 1px 0px rgba(0,0,0,.2);
+    height:50px;
+}
+
+html,body{
+    font: Helvetica Nueue;
+    font-family: sans-serif;
+    background-color: #E6ECF0;
+    height: 100%;
+    width: 100%;
+}
+
+.nav {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main{
+    flex-direction: row;
+    background-color: white;
+    width:1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 25px;
+}
+
+.home{
+    margin: 10px;
+    font-size: 25px;
+    color: white;
+    position: absolute;
+    top: 5px;
+    font-family: "Comic Sans MS";
+    left: 150px;
+    text-decoration: none;
+}
+
+.home:hover{
+    color:gainsboro;
+    cursor: pointer;
+}
+
+.register{
+    color: white;
+    background-color: rgb(0, 110, 239);
+    padding: 9px 13px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 14px;
+    text-decoration: none;
+}
+
+.register:hover{
+    color: gainsboro;
+    cursor: pointer;
+}
+
+
+.login{
+    color:white;
+    float: right;
+    padding: 5px;
+    position: absolute;
+    right: 130px;
+    top: 16px;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.login:hover{
+    cursor: pointer;
+    color: gainsboro;
+}
+
+input[type=submit]{
+    width:10%;
+}
+
+a{
+    text-decoration: none;
+}
+
+.loginbtn{
+    color:black;
+}
+
