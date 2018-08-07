@@ -1,0 +1,31 @@
+<%
+  var divClass;
+  if(data.goodStatus === 1) divClass = "good";
+  else divClass = "bad";
+%>
+<html>
+  <head>
+    <title>Result Page</title>
+    <style>
+    .bad{
+      background-color: pink;
+      width: 60%;
+      margin: 20px 20%;
+      padding: 20px 0px;
+      text-align: center;
+    }
+    .good{
+      background-color: lightgreen;
+      width: 60%;
+      margin: 20px 20%;
+      padding: 20px 0px;
+      text-align: center;
+    }
+    </style>
+  </head>
+  <body>
+  <div class="<%= divClass %>">
+    <h1><%= data.msg %></h1>
+  </div>
+  </body>
+</html>

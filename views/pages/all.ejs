@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>View All Page</title>
+  </head>
+  <body>
+  <div>
+    View all<br />
+    <% for(var i=0;i<data.login.length;i++){ %>
+      <%- include('./row', {
+          id: data.login[i]._id,
+          user: data.login[i].user,
+          pass: data.login[i].pass
+      }); %>
+    <% } %>
+    
+  </div>
+  </body>
+</html>
