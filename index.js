@@ -25,7 +25,7 @@ const loginSchema = new mongoose.Schema({
 const loginModel = mongoose.model('login', loginSchema);
 
 server.get('/', function(req, resp){
-   resp.render('./pages/index');
+   resp.render('./pages/home');
 });
 
 server.post('/create-user', function(req, resp){
