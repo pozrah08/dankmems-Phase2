@@ -70,10 +70,7 @@ server.get('/post', function(req, resp){
     resp.render('./pages/post');
 });
 
-server.get('/tags', function(req, resp){
-    
-    resp.render('./pages/tags');
-});
+
 
 server.post('/create-user', function(req, resp){
   const loginInstance = loginModel({
@@ -90,7 +87,7 @@ server.post('/create-user', function(req, resp){
   });
 });
 
-server.post('/new-post', function(req, resp){
+server.post('/create-post', function(req, resp){
 //    var allTags = req.body.tags.split(",");
 //    for (var i=0;i<allTags.length;i++){
 //        postInstance.tags[i] = allTags[i];
@@ -215,6 +212,14 @@ server.get('/all-posts', function(req, resp){
     postModel.find({}, function (err, post){
         const passData = {post:post};
         resp.render('./pages/all-posts', {data:passData});
+    });
+});
+
+server.get('/tags', function(req, resp){
+    
+    tagModel.find({}, function (err, tag){
+    const passData = { tag:tag };
+    resp.render('./pages/tags', {data: passData});
     });
 });
 

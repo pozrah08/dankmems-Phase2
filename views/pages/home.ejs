@@ -198,13 +198,14 @@ footer h3 {
     <nav class="nav">
         <span><a href="/" class="home">dankmems</a></span>
         <span><a href="/" class="trend">on firee</a></span>
-        <span><a href="Tags.html" class="taglist">tags</a></span>
+        <span><a href="/tags" class="taglist">tags</a></span>
         <span><a href="/login" class="login">Log in</a></span>
         <span><a href="/register" class="register" >Register</a></span>
     </nav>
 </div>
 <div class="main">
     <% for(var i=0;i<data.post.length;i++){ %>
+       <% if (data.post[i].privacy === 'Public'){%>
          <%- include('./post', {
             title: data.post[i].title,
             picture: data.post[i].picture,
@@ -218,7 +219,7 @@ footer h3 {
         <% } %>
     
     </div>
-    
+        <% } %>
     <% } %>
           
         
