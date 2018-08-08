@@ -162,7 +162,20 @@ a{
 }
 
 
-</style>   
+</style>
+<script>
+function searchTag(){
+    var searchTag = document.getElementById("searchbar").value;
+    <% for(var j=0;j<data.tag.length;j++) { %>
+            var tag="";
+            tag = data.tag[j].body;
+            if(searchTag.toUpperCase() == tag.toUpperCase())
+            <%- include('./tags-row', {
+                tag: data.tag[j].body,
+        }); %>
+         <% } %>
+}
+</script>
 </head>
     
 <body>
@@ -177,7 +190,15 @@ a{
     </nav>
 </div>
 <div class="main">
+    <div class="searchtag">
+        <label>Search Tag: </label><input type="text" name="searchbar" />
+        <button class="searchbtn" onclick="searchTag()">Search</button>
+    </div>
+    <div class="results">
+    
+    </div>
     <div>
+        <br/>
         <label>All Tags:</label>
         <% for(var j=0;j<data.tag.length;j++) { %>
             <%- include('./tags-row', {
