@@ -36,6 +36,7 @@ const postSchema = new mongoose.Schema({
     likes: { type: Number },
     timestamp: { type: String },
     privacy: { type: String },
+    shareuser: [ { type: String } ],
     
     
 },{ versionKey: false });
@@ -68,7 +69,8 @@ server.get('/post', function(req, resp){
 server.post('/create-user', function(req, resp){
   const loginInstance = loginModel({
     user: req.body.user,
-    pass: req.body.pass
+    pass: req.body.pass,
+    picture: 'images/Blank.png'
   });
   
   loginInstance.save(function (err, fluffy) {
@@ -80,6 +82,11 @@ server.post('/create-user', function(req, resp){
 });
 
 server.post('/new-post', function(req, resp){
+//    var allTags = req.body.tags.split(",");
+//    for (var i=0;i<allTags.length;i++){
+//        postInstance.tags[i] = allTags[i];
+//    }
+    
     const postInstance = postModel({
         title: req.body.title,
         tags: undefined,
@@ -87,9 +94,24 @@ server.post('/new-post', function(req, resp){
         comments: undefined,
         likes: 0,
         timestamp: new Date(),
-        privacy: req.body.privacy
+        privacy: req.body.privacy,
+        shareuser: undefined
         
     });
+    
+    var Tags = req.body.tags;
+    var allTags = Tags.split(",");
+    
+    for (var i=0;i<allTags.length;i++){
+       postInstance.tags[i] = allTags[i]; 
+    }
+    
+    var Share = req.body.shareuser;
+    var allShare = Share.split(",");
+    
+    for (var j=0;j<allShare.length;j++)
+        postInstance.shareuser[j] = allShare[j];
+    
     
     postInstance.save(function (err, fluffy) {
         if (err) return console.error(err);
@@ -127,6 +149,24 @@ server.post('/read-user', function(req, resp){
 //    });
 //  });
 //});
+
+server.post('/edit-profile', function(req, resp){
+    const updateQuery = {
+        user: req.body.user,
+        pass: req.body.pass,
+        };
+    
+    loginModel.findOne(updateQuery, function (err,login) {
+//        login.user = req.body.user;
+//        login.pass = req.body.pass;
+        login.picture = req.body.picture;
+        
+        login.save(function (err, result) {
+            if (err) return console.error(err);
+            resp.render('./pages/home', {});
+        });
+    });
+});
 
 server.get('/view-all',function(req, resp){
     

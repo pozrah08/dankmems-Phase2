@@ -124,6 +124,9 @@
     }
     
 </style>
+<script>function myFunction() {
+    alert("Meme uploaded!");
+}</script>
 <head>
 <title>dankmems: Memes are Dreams</title>
 </head>
@@ -143,16 +146,22 @@
     <span><h1>CREATE POST</h1></span>
 <div class="uploadmeme">
     <form name="new-post" action="new-post" method="post">
-        <span><input type="file" class="upload" name="picture"/></span>
-        <label>Dank title:</label>
-        <input type="text" name="title"/>
+        <div><input type="file" class="upload" name="picture"/></div>
+        <br>
+        <span><label>Dank title:</label> <input type="text" name="title"/></span>
         &emsp;
         <span><input type="radio" name="privacy" value="Public" checked="checked">Public</span>
         <span><input type="radio" name="privacy" value="Private">Private</span>
-        <br/><br/>
-        <label>Share meme with:</label><input type="text" name="shareuser"/>
+        <br/>
+        <br>
+        <div><label>Tags:</label> <input type="text" name="tags"/></div>
+        <br/>
+        <label>Share meme with:</label>
+        <input type="text" name="shareuser"/>
         &emsp;
-        <span><button>Upload meme</button></span>
+        <br>
+        <br>
+        <div><button onclick="myFunction()">Upload meme</button></div>
     </form>
 </div> 
 </div>
