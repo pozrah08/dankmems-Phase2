@@ -70,7 +70,13 @@ server.get('/post', function(req, resp){
     resp.render('./pages/post');
 });
 
-
+server.get('/tags-result', function(req, resp){
+//    var val = req.query.id;
+    postModel.find({tags: {$regex: "test.*" }}, function (err, post){
+        const passData = { post: post, variable: req.query.id };
+        resp.render('./pages/all-posts', {data: passData});
+    });
+});
 
 server.post('/create-user', function(req, resp){
   const loginInstance = loginModel({
