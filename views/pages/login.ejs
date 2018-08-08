@@ -48,6 +48,8 @@
   </body>
 </html>
 -->
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -156,8 +158,15 @@ a{
 
 
 </style>
+<script>
+function errorLogin(){
+    if(<%=data.goodStatus%> == 0){
+        alert("Wrong Username/Password!");
+    }
+}
+</script>
 </head>
-<body>
+<body >
 <div class="container">
 <div class="header">
     <nav class="nav">
@@ -178,8 +187,11 @@ a{
     <input type="password" name="pass"/>
 <br/>
 <br/>
+<input type="checkbox" name="rememberme"/> Remember Me
+<br/>
+<br/>
 <!--    <button><a href="User_Home.html" class="loginbtn">Log in</a></button>-->
-    <input type="submit" value="Login"/>
+    <input type="submit" value="Login" onclick="errorLogin()"/>
 <br/>
 <br/>
 <label>Don't have an account yet?</label>

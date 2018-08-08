@@ -128,12 +128,12 @@ server.post('/read-user', function(req, resp){
     
     if(login != undefined && login._id != null)
         queryResult = 1;
-
+      var renderPage;
       var strMsg;
-      if(queryResult === 1)strMsg = "User-name and password match!";
-      else strMsg = "User-name and password do not match!";
+      if(queryResult === 1)renderPage = "./pages/home";
+      else renderPage = "./pages/login";
       const passData = { goodStatus: queryResult, msg:strMsg };
-      resp.render('./pages/resultlogin',{ data:passData });
+      resp.render(renderPage,{ data:passData });
   });
 });
 
@@ -186,7 +186,8 @@ server.get('/all-posts', function(req, resp){
 });
 
 server.get('/login', function(req, resp){
-        resp.render('./pages/login', {});   
+        resp.render('./pages/login', {data:""});
+    
     });
 
 server.get('/register', function(req, resp){
