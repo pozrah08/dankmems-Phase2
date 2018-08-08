@@ -55,7 +55,11 @@ const tagModel = mongoose.model('tag', tagSchema);
  
 
 server.get('/', function(req, resp){
-   resp.render('./pages/home');
+//   resp.render('./pages/home');
+        postModel.find({}, function (err, post){
+        const passData = { post:post };
+        resp.render('./pages/home',{ data:passData });
+    });
 });
 
 server.get('/create-post', function(req, resp){
@@ -64,6 +68,11 @@ server.get('/create-post', function(req, resp){
 
 server.get('/post', function(req, resp){
     resp.render('./pages/post');
+});
+
+server.get('/tags', function(req, resp){
+    
+    resp.render('./pages/tags');
 });
 
 server.post('/create-user', function(req, resp){
@@ -104,6 +113,28 @@ server.post('/new-post', function(req, resp){
     
     for (var i=0;i<allTags.length;i++){
        postInstance.tags[i] = allTags[i]; 
+        
+       var queryResult = 0;
+       const searchQuery = { body: postInstance.tags[i]}
+       tagModel.findOne(searchQuery, function (err, tag) {
+           if (err) return console.error(err);
+           if (tag != undefined && tag._id != null)
+               queryResult = 1;
+       });
+        
+       if (queryResult === 0) {
+           const tagInstance = tagModel({
+               userID: undefined, //fix this
+               body: postInstance.tags[i],
+               timestamp: new Date(),
+               parentPostID: postInstance._id
+
+           });
+           
+           tagInstance.save(function (err,fluffy){
+               if(err) return console.error(err);
+           });
+       }
     }
     
     var Share = req.body.shareuser;
@@ -111,6 +142,8 @@ server.post('/new-post', function(req, resp){
     
     for (var j=0;j<allShare.length;j++)
         postInstance.shareuser[j] = allShare[j];
+    
+    
     
     
     postInstance.save(function (err, fluffy) {
@@ -128,12 +161,12 @@ server.post('/read-user', function(req, resp){
     
     if(login != undefined && login._id != null)
         queryResult = 1;
-      var renderPage;
+
       var strMsg;
-      if(queryResult === 1)renderPage = "./pages/home-user";
-      else renderPage = "./pages/login";
+      if(queryResult === 1)strMsg = "User-name and password match!";
+      else strMsg = "User-name and password do not match!";
       const passData = { goodStatus: queryResult, msg:strMsg };
-      resp.render(renderPage,{ data:passData });
+      resp.render('./pages/resultlogin',{ data:passData });
   });
 });
 
@@ -186,15 +219,11 @@ server.get('/all-posts', function(req, resp){
 });
 
 server.get('/login', function(req, resp){
-        resp.render('./pages/login', {data:""});  
+        resp.render('./pages/login', {});   
     });
 
 server.get('/register', function(req, resp){
     resp.render('./pages/register', {});
-});
-
-server.get('/profile', function(req, resp){
-    resp.render('./pages/profile', {});
 });
 
 

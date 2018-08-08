@@ -4,13 +4,13 @@
 <title>dankmems: Memes are Dreams</title>
 <!--<link rel="stylesheet" href="Home.css">-->
 <style>
-    .header{
+.header{
     background-color: black;
     box-shadow: 0 1px 0px rgba(0,0,0,.2);
     height:50px;
 }
 
-html,body {
+html,body{
     font: Helvetica Nueue;
     font-family: sans-serif;
     background-color: #E6ECF0;
@@ -30,6 +30,19 @@ html,body {
     flex-direction: column;
 }
 
+.tags{
+    color: dodgerblue;
+    font-weight: bold;
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tagsresult{
+    border-bottom: 0.5px #E6ECF0 solid;
+    padding: 20px;
+}
+
 .tags:hover{
     color:deepskyblue;
 }
@@ -42,6 +55,11 @@ html,body {
 
 label{
     font-weight: bold;
+}
+
+.searchtag{
+    border-bottom: 0.5px #E6ECF0 solid;
+    padding: 20px;
 }
 
 img{
@@ -59,44 +77,7 @@ img{
     justify-content: center;
     align-items: center;
     margin: auto;
-}
-
-footer{
-    background-color: white;
-    width: 1000px;
-    
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
-
-.tags{
-    color: dodgerblue;
-    font-weight: bold;
     padding: 20px;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.footerlist {
-    font-weight: bold;
-    color: black;
-    padding: 20px;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.footeritem {
-    color: black;
-    margin-left: auto
-    padding: 20px;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.footer {
-    background-color: white;
 }
 
 
@@ -123,7 +104,7 @@ a{
        left: 550px;
 }
 
-.home:hover, .taglist:hover, .trend:hover, .footerlist:hover{
+.home:hover, .taglist:hover, .trend:hover{
     color:gainsboro;
     cursor: pointer;
 }
@@ -176,19 +157,11 @@ a{
     margin-top: 10px;
 }
 
-footer ul {
-  list-style: none;
-  display: block;
-  float: left;
+.searchbtn{
+    color: black;
 }
-footer h3 {
-  font-weight: 100;
-  margin-bottom: 0;
-}
-.pink{color: pink;}
-.red{color: red;}
-.orange{color: orange;}
-.green{color: green;}
+
+
 </style>   
 </head>
     
@@ -196,36 +169,48 @@ footer h3 {
 <div class="container">
 <div class="header">
     <nav class="nav">
-        <span><a href="/" class="home">dankmems</a></span>
-        <span><a href="/" class="trend">on firee</a></span>
+        <span><a href="Home.html" class="home">dankmems</a></span>
+        <span><a href="Home.html" class="trend">on firee</a></span>
         <span><a href="Tags.html" class="taglist">tags</a></span>
-        <span><a href="/login" class="login">Log in</a></span>
-        <span><a href="/register" class="register" >Register</a></span>
+        <span><a href="Login.html" class="login">Log in</a></span>
+        <span><a href="Register.html" class="register" >Register</a></span>
     </nav>
 </div>
 <div class="main">
-    <% for(var i=0;i<data.post.length;i++){ %>
-         <%- include('./post', {
-            title: data.post[i].title,
-            picture: data.post[i].picture,
-            tags: data.post[i].tags,
-      }); %>
-        <% for(var j=0;j<data.post[i].tags.length;j++) { %>
-            <%- include('./tags-row', {
-                tag: data.post[i].tags[j],
-        }); %>
-    
-        <% } %>
-    
+    <div>
+        <label>All Tags:</label>
     </div>
-    
-    <% } %>
-          
+    <div>
+        <span><div class="tags">4chan</div></span>
+        <span><div class="tags">anime</div></span>
+        <span><div class="tags">carsmovie</div></span>
+        <span><div class="tags">car-salesman</div></span>
+        <span><div class="tags">chris-brown</div></span>
+        <span><div class="tags">cringe</div></span>
+        <span><div class="tags">dark-humor</div></span>
+        <span><div class="tags">deep-fried</div></span>
+        <span><div class="tags">facebook</div></span>
+        <span><div class="tags">fallout</div></span>
+        <span><div class="tags">fortnite</div></span>
+        <span><div class="tags">funny</div></span>
+        <span><div class="tags">gif</div></span>
+        <span><div class="tags">incredibles</div></span>
+        <span><div class="tags">konosuba</div></span>
+        <span><div class="tags">NSFW</div></span>
+        <span><div class="tags">pedo</div></span>
+        <span><div class="tags">spongebob</div></span>
+        <span><div class="tags">reddit</div></span>
+        <span><div class="tags">relatable</div></span>
+        <span><div class="tags">r6-siege</div></span>
+        <span><div class="tags">trap</div></span>
+        <span><div class="tags">tumblr-things</div></span>
+        <span><div class="tags">umaru</div></span>
+        <span><div class="tags">videogames</div></span>
+        <span><div class="tags">wholesome</div></span>
+        <span><div class="tags">wii-sports</div></span>
+        <span><div class="tags">zawarudo</div></span>
         
-
-    
-    
-    
+    </div>
     
 </div>
 </div>
