@@ -130,7 +130,7 @@ server.post('/read-user', function(req, resp){
         queryResult = 1;
       var renderPage;
       var strMsg;
-      if(queryResult === 1)renderPage = "./pages/home";
+      if(queryResult === 1)renderPage = "./pages/home-user";
       else renderPage = "./pages/login";
       const passData = { goodStatus: queryResult, msg:strMsg };
       resp.render(renderPage,{ data:passData });
@@ -186,12 +186,15 @@ server.get('/all-posts', function(req, resp){
 });
 
 server.get('/login', function(req, resp){
-        resp.render('./pages/login', {data:""});
-    
+        resp.render('./pages/login', {data:""});  
     });
 
 server.get('/register', function(req, resp){
     resp.render('./pages/register', {});
+});
+
+server.get('/profile', function(req, resp){
+    resp.render('./pages/profile', {});
 });
 
 
