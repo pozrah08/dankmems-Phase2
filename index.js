@@ -15,6 +15,8 @@ const bodyParser = require('body-parser')
 server.use(express.json()); 
 server.use(express.urlencoded({ extended: true }));
 
+server.use(express.static('public'));
+
 server.set('view engine', 'ejs');
 
 const loginSchema = new mongoose.Schema({
@@ -33,6 +35,8 @@ const postSchema = new mongoose.Schema({
     comments: [ { type: String } ],
     likes: { type: Number },
     timestamp: { type: String },
+    privacy: { type: String },
+    
     
 },{ versionKey: false });
 
@@ -57,6 +61,10 @@ server.get('/create-post', function(req, resp){
    resp.render('./pages/createpost');       
 });
 
+server.get('/post', function(req, resp){
+    resp.render('./pages/post');
+});
+
 server.post('/create-user', function(req, resp){
   const loginInstance = loginModel({
     user: req.body.user,
@@ -69,6 +77,24 @@ server.post('/create-user', function(req, resp){
     resp.render('./pages/resultregister',{ data:passData });
     
   });
+});
+
+server.post('/new-post', function(req, resp){
+    const postInstance = postModel({
+        title: req.body.title,
+        tags: undefined,
+        picture: req.body.picture,
+        comments: undefined,
+        likes: 0,
+        timestamp: new Date(),
+        privacy: req.body.privacy
+        
+    });
+    
+    postInstance.save(function (err, fluffy) {
+        if (err) return console.error(err);
+        resp.render('./pages/createpost',{});
+    });
 });
 
 server.post('/read-user', function(req, resp){
@@ -111,6 +137,14 @@ server.get('/view-all',function(req, resp){
     
 });
 
+server.get('/all-posts', function(req, resp){
+    
+    postModel.find({}, function (err, post){
+        const passData = {post:post};
+        resp.render('./pages/all-posts', {data:passData});
+    });
+});
+
 server.get('/login', function(req, resp){
         resp.render('./pages/login', {});   
     });
@@ -118,6 +152,7 @@ server.get('/login', function(req, resp){
 server.get('/register', function(req, resp){
     resp.render('./pages/register', {});
 });
+
 
 server.get('/view-test',function(req, resp){
     //https://stackoverflow.com/questions/43729199/how-i-can-use-like-operator-on-mongoose

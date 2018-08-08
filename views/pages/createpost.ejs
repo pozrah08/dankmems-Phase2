@@ -142,17 +142,19 @@
 <div class="info">
     <span><h1>CREATE POST</h1></span>
 <div class="uploadmeme">
-    <span><input type="file" class="upload"/></span>
-    <label>Dank title:</label>
-    <input type="text" name="title"/>
-    &emsp;
-    <span><input type="radio" name="privacy" value="Public" checked="checked">Public</span>
-    <span><input type="radio" name="privacy" value="Private">Private</span>
-    <br/><br/>
-    <label>Share meme with:</label><input type="text" name="shareuser"/>
-    &emsp;
-    <span><button>Upload meme</button></span>
-    
+    <form name="new-post" action="new-post" method="post">
+        <span><input type="file" class="upload" name="picture"/></span>
+        <label>Dank title:</label>
+        <input type="text" name="title"/>
+        &emsp;
+        <span><input type="radio" name="privacy" value="Public" checked="checked">Public</span>
+        <span><input type="radio" name="privacy" value="Private">Private</span>
+        <br/><br/>
+        <label>Share meme with:</label><input type="text" name="shareuser"/>
+        &emsp;
+        <span><button>Upload meme</button></span>
+    </form>
+</div> 
 </div>
 </div>
 </div>

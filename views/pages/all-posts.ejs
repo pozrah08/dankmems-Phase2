@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>View All Page</title>
+  </head>
+  <body>
+  <div>
+    View all<br />
+    <% for(var i=0;i<data.post.length;i++){ %>
+      <%- include('./row', {
+          id: data.post[i]._id,
+          title: data.post[i].title,
+          likes: data.post[i].likes,
+          timestamp: data.post[i].timestamp,
+          picture: data.post[i].picture
+      }); %>
+    <% } %>
+    
+  </div>
+  </body>
+</html>
