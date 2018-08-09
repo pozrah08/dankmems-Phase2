@@ -65,6 +65,10 @@ server.get('/', function(req, resp){
     });
 });
 
+server.get('/home-user', function(req, resp){
+    resp.render('./pages/home-user',{});
+});
+
 server.get('/create-post', function(req, resp){
    resp.render('./pages/createpost');       
 });
@@ -98,7 +102,11 @@ server.get('/viewbig', function(req, resp){
         const passData = { post: post };
         resp.render('./pages/viewbig', {data: passData});
     });
-})
+});
+
+server.get('/profile', function(req,resp){
+    resp.render('./pages/profile', {});
+});
 
 server.post('/create-user', function(req, resp){
   const loginInstance = loginModel({
@@ -114,8 +122,8 @@ server.post('/create-user', function(req, resp){
   
   loginInstance.save(function (err, fluffy) {
     if(err) return console.error(err);
-//    const passData = { goodStatus: 1, msg:"User created successfully" };
-//    resp.render('./pages/resultregister',{ data:passData });
+    const passData = { goodStatus: 1, msg:"User created successfully" };
+    resp.render('./pages/login',{ data:passData });
     
   });
 });
@@ -190,11 +198,9 @@ server.post('/read-user', function(req, resp){
   const searchQuery = { user: req.body.user};  
   var queryResult = 0;
     
-  
-
   loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
-    var renderPage;
+    
     if(login != undefined && login._id != null)
 //        queryResult = 1;
         var cipher = crypto.createDecipher('aes-128-cbc', 'mypassword');
@@ -205,11 +211,13 @@ server.post('/read-user', function(req, resp){
         console.log("queryResult: " + queryResult)
 
       var strMsg;
-      if(queryResult === 1)renderPage = "./pages/home-user";
-      else renderPage = "./pages/login";
-      const passData = { goodStatus: queryResult, msg:strMsg };
-      resp.render(renderPage,{ data:passData });
+      if(queryResult === 1){
+        const passData = { login: login };
+        resp.render('./pages/home-user',{ login : login });
+      }
+      
   });
+    
 });
 
 //server.post('/update-user', function(req, resp){
