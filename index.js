@@ -114,8 +114,8 @@ server.post('/create-user', function(req, resp){
   
   loginInstance.save(function (err, fluffy) {
     if(err) return console.error(err);
-    const passData = { goodStatus: 1, msg:"User created successfully" };
-    resp.render('./pages/resultregister',{ data:passData });
+//    const passData = { goodStatus: 1, msg:"User created successfully" };
+//    resp.render('./pages/resultregister',{ data:passData });
     
   });
 });
@@ -194,7 +194,7 @@ server.post('/read-user', function(req, resp){
 
   loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
-    
+    var renderPage;
     if(login != undefined && login._id != null)
 //        queryResult = 1;
         var cipher = crypto.createDecipher('aes-128-cbc', 'mypassword');
@@ -205,10 +205,10 @@ server.post('/read-user', function(req, resp){
         console.log("queryResult: " + queryResult)
 
       var strMsg;
-      if(queryResult === 1)strMsg = "User-name and password match!";
-      else strMsg = "User-name and password do not match!";
+      if(queryResult === 1)renderPage = "./pages/home-user";
+      else renderPage = "./pages/login";
       const passData = { goodStatus: queryResult, msg:strMsg };
-      resp.render('./pages/resultlogin',{ data:passData });
+      resp.render(renderPage,{ data:passData });
   });
 });
 
