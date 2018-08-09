@@ -66,7 +66,12 @@ server.get('/', function(req, resp){
 });
 
 server.get('/home-user', function(req, resp){
-    resp.render('./pages/home-user',{});
+    
+    postModel.find({}, function (err, post){
+    const passData = { post:post };
+     resp.render('./pages/home-user',{data: passData});
+    });
+    
 });
 
 server.get('/create-post', function(req, resp){
@@ -126,6 +131,8 @@ server.post('/create-user', function(req, resp){
     resp.render('./pages/login',{ data:passData });
     
   });
+    
+    resp.render('./pages/login',{ data:passData });
 });
 
 server.post('/create-post', function(req, resp){
@@ -217,7 +224,7 @@ server.post('/read-user', function(req, resp){
       }
       
   });
-    
+    resp.render('./pages/home-user',{ login : login });
 });
 
 //server.post('/update-user', function(req, resp){
