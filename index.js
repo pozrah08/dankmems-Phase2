@@ -5,6 +5,9 @@
 const express = require('express');
 const server = express();
 
+var crypto = require('crypto');
+var mykey = crypto.createCipher('aes-128-cbc', 'mypassword');
+
 //Require a MongoDB connection using mongoose. Include the mongoose library
 //and feed it the correct url to run MongoDB.
 //URL is the database it connects to.
@@ -78,12 +81,36 @@ server.get('/tags-result', function(req, resp){
     });
 });
 
+server.get('/viewbig', function(req, resp){
+    var split = req.query.id.split(",");
+    
+    console.log("Picture: " +split[0]);
+    console.log("Title: " +split[1]);
+    
+    const searchQuery = {title: split[1], picture: split[0]}
+    
+        postModel.findOne(searchQuery, function (err, post){
+        if (post != undefined && post._id != null){
+            const passData = { post: post };
+            console.log("Id: " + post._id);
+        }
+            
+        const passData = { post: post };
+        resp.render('./pages/viewbig', {data: passData});
+    });
+})
+
 server.post('/create-user', function(req, resp){
   const loginInstance = loginModel({
     user: req.body.user,
     pass: req.body.pass,
     picture: 'images/Blank.png'
   });
+    
+    loginInstance.pass = mykey.update(req.body.pass,'utf8','hex') + mykey.final('hex');
+    
+    
+    console.log(loginInstance.pass);
   
   loginInstance.save(function (err, fluffy) {
     if(err) return console.error(err);
@@ -110,6 +137,9 @@ server.post('/create-post', function(req, resp){
         shareuser: undefined
         
     });
+    
+    
+    
     
     var Tags = req.body.tags;
     var allTags = Tags.split(",");
@@ -156,14 +186,23 @@ server.post('/create-post', function(req, resp){
 });
 
 server.post('/read-user', function(req, resp){
-  const searchQuery = { user: req.body.user, pass: req.body.pass };
+//  const searchQuery = { user: req.body.user, pass: req.body.pass };
+  const searchQuery = { user: req.body.user};  
   var queryResult = 0;
+    
+  
 
   loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
     
     if(login != undefined && login._id != null)
-        queryResult = 1;
+//        queryResult = 1;
+        var cipher = crypto.createDecipher('aes-128-cbc', 'mypassword');
+        var decipheredPass = cipher.update(login.pass, 'hex', 'utf8') + cipher.final('utf8');
+        if (req.body.pass === decipheredPass)
+            queryResult = 1;
+        console.log(decipheredPass);
+        console.log("queryResult: " + queryResult)
 
       var strMsg;
       if(queryResult === 1)strMsg = "User-name and password match!";
