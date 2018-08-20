@@ -207,6 +207,23 @@ footer h3 {
     
 </div>
 <div class="main">
+    <% for(var i=0;i<data.post.length;i++){ %>
+       <% if (data.post[i].privacy === 'Public'){%>
+         <%- include('./post', {
+            title: data.post[i].title,
+            picture: data.post[i].picture,
+            tags: data.post[i].tags,
+      }); %>
+        <% for(var j=0;j<data.post[i].tags.length;j++) { %>
+            <%- include('./tags-row', {
+                tag: data.post[i].tags[j],
+        }); %>
+    
+        <% } %>
+    
+    </div>
+        <% } %>
+    <% } %>
 </div>
 </div>
 </body>

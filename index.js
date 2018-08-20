@@ -31,6 +31,15 @@ const loginSchema = new mongoose.Schema({
 
 const loginModel = mongoose.model('login', loginSchema);
 
+const loggedinSchema = new mongoose.Schema({
+  user: { type: String },
+  pass: { type: String },
+  picture: { type: String },
+    
+},{ versionKey: false });
+
+const loggedinModel = mongoose.model('loggedin', loggedinSchema);
+
 const postSchema = new mongoose.Schema({
     title: { type: String },
     tags: [ { type: String } ],
@@ -74,6 +83,8 @@ server.get('/home-user', function(req, resp){
     
 });
 
+
+
 server.get('/create-post', function(req, resp){
    resp.render('./pages/createpost');       
 });
@@ -110,6 +121,8 @@ server.get('/viewbig', function(req, resp){
 });
 
 server.get('/profile', function(req,resp){
+    
+//    const passData = {login: login};
     resp.render('./pages/profile', {});
 });
 
@@ -132,7 +145,31 @@ server.post('/create-user', function(req, resp){
     
   });
     
-    resp.render('./pages/login',{ data:passData });
+  const loggedinInstance = loggedinModel({
+    user: req.body.user,
+    pass: req.body.pass,
+    picture: 'images/Blank.png'  
+  });
+    
+    const searchQuery = {user: req.body.user, pass: req.body.pass};
+    var val = 0;
+    
+    loggedinModel.find(searchQuery, function (err,post){
+        if(post != undefined && post_.id != null)
+            val = 1;
+    });
+    
+    if (val === 1){
+        loggedinInstance.save(function (err, fluffy){
+            if (err) return console.error(err);
+                const passData = { login: login };
+        resp.render('./pages/login',{ data:passData });
+        });
+    }
+    else
+        resp.render('./pages/register', {});
+    
+    
 });
 
 server.post('/create-post', function(req, resp){
@@ -220,11 +257,10 @@ server.post('/read-user', function(req, resp){
       var strMsg;
       if(queryResult === 1){
         const passData = { login: login };
-        resp.render('./pages/home-user',{ login : login });
+        resp.render('./pages/resultlogin',{data:passData });
       }
       
   });
-    resp.render('./pages/home-user',{ login : login });
 });
 
 //server.post('/update-user', function(req, resp){
